@@ -26,7 +26,7 @@ def get_endesa_price(url, registry):
                             else:
                                 tipus = tipus.split('=')[1]
                             print(tipus)
-                            var = Gauge('preu2KW_' + tipus, 'preu €/KW tarifa ' + tipus, registry=registry)
+                            var = Gauge('preuKW_' + tipus, 'preu €/KW tarifa ' + tipus, registry=registry)
                             var.set(elemnt.split('>')[1])
                             i = len(html)
                 i += 1
