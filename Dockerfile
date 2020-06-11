@@ -3,4 +3,5 @@ COPY edistribucion.py .
 RUN pip install requests
 RUN apk add curl
 RUN pip install prometheus_client
+ENV JOB=E-energia
 ENTRYPOINT "/edistribucion.py"

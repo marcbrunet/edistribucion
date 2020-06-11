@@ -6,7 +6,7 @@ import time
 import requests
 from datetime import datetime
 from prometheus_client import CollectorRegistry, Gauge, push_to_gateway
-
+import datetime
 
 def get_endesa_price(url, registry):
     try:
@@ -54,6 +54,8 @@ def get_edistribucion(curl, registry):
 
 curl = os.environ['EDISTRIBUCION']
 push = os.environ['PUSHGATEWAY']
+job = os.environ['JOB']
+
 while True:
     registry = CollectorRegistry()
     # declare metrics
@@ -66,5 +68,5 @@ while True:
 
     get_edistribucion(curl, registry)
 
-    push_to_gateway(push, job='E-energia', registry=registry)
+    push_to_gateway(push, job=job, registry=registry)
     time.sleep(30)
