@@ -15,7 +15,7 @@ def get_endesa_price(url, registry):
         if r.status_code == 200:
             while i < len(html):
                 hora = datetime.now().hour
-                formathora = "{}h - ".format(hora)
+                formathora = 'itemprop="description">{}h - '.format(hora)
                 if formathora in html[i]:
                     for elemnt in html[i].split(" "):
                         if 'itemprop="price">' in elemnt:
