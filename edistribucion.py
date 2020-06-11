@@ -6,7 +6,6 @@ import time
 import requests
 from datetime import datetime
 from prometheus_client import CollectorRegistry, Gauge, push_to_gateway
-import datetime
 
 def get_endesa_price(url, registry):
     try:
@@ -25,7 +24,6 @@ def get_endesa_price(url, registry):
                                 tipus = 'Normal'
                             else:
                                 tipus = tipus.split('=')[1]
-                            print(tipus)
                             var = Gauge('preuKW_' + tipus, 'preu €/KW tarifa ' + tipus, registry=registry)
                             var.set(elemnt.split('>')[1])
                             i = len(html)
