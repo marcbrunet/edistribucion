@@ -36,18 +36,19 @@ def get_endesa_price(url, registry):
 def get_edistribucion(curl, registry):
     try:
         x = os.popen(curl).read()
-        if None != json.loads(x)['actions'][0]['returnValue']:
-            potenciaActual = Gauge('potenciaActual', 'potencia Actual', registry=registry)
-            potenciaActual.set(json.loads(x)['actions'][0]['returnValue']['data']['potenciaActual'])
+        for valus in json.loads(x)['actions']:
+            if None != valus['returnValue']:
+                potenciaActual = Gauge('potenciaActual', 'potencia Actual', registry=registry)
+                potenciaActual.set(json.loads(x)['actions'][0]['returnValue']['data']['potenciaActual'])
 
-            totalizador = Gauge('totalizador', 'total enegira consumida per perioda de facturacio ', registry=registry)
-            totalizador.set(json.loads(x)['actions'][0]['returnValue']['data']['totalizador'])
+                totalizador = Gauge('totalizador', 'total enegira consumida per perioda de facturacio ', registry=registry)
+                totalizador.set(json.loads(x)['actions'][0]['returnValue']['data']['totalizador'])
 
-            estadoICP = Gauge('estadoICP', 'estat del ICP del contador ', registry=registry)
-            estadoICP.set(json.loads(x)['actions'][0]['returnValue']['data']['estadoICP'] == "Abierto")
+                estadoICP = Gauge('estadoICP', 'estat del ICP del contador ', registry=registry)
+                estadoICP.set(json.loads(x)['actions'][0]['returnValue']['data']['estadoICP'] == "Abierto")
 
-            potenciaContratada = Gauge('potenciaContratada', 'KW de potencia contractada', registry=registry)
-            potenciaContratada.set(json.loads(x)['actions'][0]['returnValue']['data']['potenciaContratada'])
+                potenciaContratada = Gauge('potenciaContratada', 'KW de potencia contractada', registry=registry)
+                potenciaContratada.set(json.loads(x)['actions'][0]['returnValue']['data']['potenciaContratada'])
     except Exception as e:
         print(e)
 
