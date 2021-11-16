@@ -6,7 +6,7 @@ from backend.EdistribucionAPI import Edistribucion
 import pytz
 
 USER = '77626485j'
-PASSWORD = 'Ymarc741!'
+PASSWORD = 'XXXX'
 
 edis = Edistribucion(USER,PASSWORD)
 edis.login()
